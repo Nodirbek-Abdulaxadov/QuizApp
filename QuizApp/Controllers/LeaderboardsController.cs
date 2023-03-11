@@ -10,7 +10,7 @@ namespace QuizApp.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class LeaderboardsController : ControllerBase
 {
     private readonly AppDbContext _dbContext;
