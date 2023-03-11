@@ -10,7 +10,7 @@ namespace QuizApp.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-//[Authorize]
+[Authorize]
 public class LeaderboardsController : ControllerBase
 {
     private readonly AppDbContext _dbContext;
@@ -44,15 +44,17 @@ public class LeaderboardsController : ControllerBase
                     Score = result.Score
                 }) ;
             }
-
-            foreach (var leader in leaders)
+            else
             {
-                leader.Score = result.Score;
-                leader.Email = user.Email;
-                leader.FullName = user.FullName;
+                foreach (var leader in leaders)
+                {
+                    leader.Score = result.Score;
+                    leader.Email = user.Email;
+                    leader.FullName = user.FullName;
+                }
             }
         }
 
-        return Ok(leaders);
+        return Ok(leaders.OrderByDescending(i => i.Score););
     }
 }
