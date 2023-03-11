@@ -55,6 +55,6 @@ public class LeaderboardsController : ControllerBase
             }
         }
 
-        return Ok(leaders.OrderByDescending(i => i.Score););
+        return Ok(leaders.OrderByDescending(i => i.Score));
     }
 }
