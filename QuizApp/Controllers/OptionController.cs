@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuizApp.Data;
 using QuizApp.Models;
@@ -8,6 +9,7 @@ namespace QuizApp.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class OptionController : ControllerBase
 {
     private readonly AppDbContext _dbContext;
@@ -36,6 +38,7 @@ public class OptionController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Post(AddOptionViewModel viewModel)
     {
         if (ModelState.IsValid)
@@ -57,6 +60,7 @@ public class OptionController : ControllerBase
     }
 
     [HttpPut]
+    [AllowAnonymous]
     public IActionResult Put(UpdateOptionViewModel viewModel)
     {
         if (ModelState.IsValid)
@@ -79,6 +83,7 @@ public class OptionController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [AllowAnonymous]
     public async Task<IActionResult> Delete(int id)
     {
         var model = await _dbContext.Options.FirstOrDefaultAsync(i => i.Id == id);
