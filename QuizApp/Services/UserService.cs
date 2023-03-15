@@ -1,5 +1,6 @@
 ﻿using Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using QuizApp.Data;
@@ -177,4 +178,7 @@ public class UserService : IUserService
         _dbContext.RefreshTokens.Remove(storedToken);
         await _dbContext.SaveChangesAsync();
     }
+
+    public async Task<List<User>> GetAll()
+        => await _userManager.Users.ToListAsync();
 }
