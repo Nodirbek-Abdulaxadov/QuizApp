@@ -33,7 +33,7 @@ public class UserService : IUserService
         var userExist = await _userManager.FindByEmailAsync(viewModel.Email);
         if (userExist != null)
         {
-            throw new Exception("This phone number is already exist!");
+            throw new Exception("This email is already exist!");
         }
 
         User user = new()
@@ -72,7 +72,7 @@ public class UserService : IUserService
             return JsonConvert.SerializeObject(await GenerateTokenAsync(userExist, null));
         }
 
-        throw new Exception("Login failed! Incorrect phone number or password!");
+        throw new Exception("Login failed! Incorrect email or password!");
     }
 
     private async Task<AuthResultViewModel> GenerateTokenAsync(User user, RefreshToken refresh)

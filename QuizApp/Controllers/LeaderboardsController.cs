@@ -28,7 +28,7 @@ public class LeaderboardsController : ControllerBase
     {
         var results = await _dbContext.QuizResults.ToListAsync();
         List<LeaderViewModel> leaders = new List<LeaderViewModel>();
-        foreach (var result in results)
+        foreach (var result in results.Where(r => r.QuizId == quizId))
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == result.UserId);
             if (user == null)
