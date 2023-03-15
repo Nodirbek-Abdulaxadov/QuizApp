@@ -101,6 +101,7 @@ public class UserService : IUserService
         {
             var rToken = new AuthResultViewModel()
             {
+                UserId = user.Id,
                 FullName = user.FullName,
                 Email = user.Email,
                 Token = jwtToken,
@@ -125,7 +126,9 @@ public class UserService : IUserService
 
         var response = new AuthResultViewModel()
         {
+            UserId = user.Id,
             FullName = user.FullName,
+            Email = user.Email,
             Token = jwtToken,
             RefreshToken = refreshToken.Token,
             ExpiresAt = token.ValidTo,
